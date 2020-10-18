@@ -7,11 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class BodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read(userViewModelProvider);
+
     return Consumer(
       builder: (context, watch, child) {
         return SingleChildScrollView(
           child: FutureBuilder<List<User>>(
-            future: watch(userListProvider.future),
+            future: viewModel.get(),
             builder: (context, snapshot) {
               final userList = snapshot.data;
               if (userList == null) {

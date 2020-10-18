@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_mock_api_test/body.dart';
+import 'package:flutter_app_mock_api_test/providers.dart';
+import 'package:flutter_app_mock_api_test/user.dart';
 import 'package:flutter_riverpod/all.dart';
 
 void main() {
@@ -29,12 +31,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void _incrementCounter(BuildContext context) {
+    final viewModel = context.read(userViewModelProvider);
+    viewModel.putUser(
+      User(
+          id: "1",
+          createdAt: "",
+          name: "name",
+          avatar:
+              "https://s3.amazonaws.com/uifaces/faces/twitter/justinrhee/128.jpg"),
+    );
   }
 
   @override
@@ -45,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: BodyWidget(),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => _incrementCounter(context),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),

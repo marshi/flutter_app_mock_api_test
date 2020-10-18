@@ -13,4 +13,11 @@ class UserApi {
       return users;
     });
   }
+
+  Future<User> put(User user) {
+    dio.put(
+      "https://5f8ab14c8453150016706147.mockapi.io/users/${user.id}",
+      data: {"name": user.name + " put"},
+    );
+  }
 }
