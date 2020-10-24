@@ -12,15 +12,16 @@ class BodyWidget extends StatelessWidget {
     return Consumer(
       builder: (context, watch, child) {
         List<User> userList = watch(userViewModelProvider).userList;
-        Widget widget;
         if (userList.isEmpty) {
-          widget = Text("loading");
-        } else {
-          final items =
-              userList.map((e) => UserItem(e.avatar, e.name)).toList();
-          widget = Column(children: items);
+          return Text("loading");
         }
-        return SingleChildScrollView(child: widget);
+        final items = userList.map((e) => UserItem(e.avatar, e.name)).toList();
+        return ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return items[index];
+          },
+        ); //SingleChildScrollView(child: widget);
       },
     );
   }

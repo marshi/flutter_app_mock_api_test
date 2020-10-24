@@ -12,6 +12,7 @@ class UserViewModel extends ChangeNotifier {
 
   Future<List<User>> get() {
     return _userApi.get().then((value) {
+      _userList.clear();
       _userList.addAll(value);
       notifyListeners();
       return _userList;
