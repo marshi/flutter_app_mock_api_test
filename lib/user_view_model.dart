@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_mock_api_test/user.dart';
-import 'package:flutter_app_mock_api_test/user_api.dart';
+import 'package:flutter_app_mock_api_test/user_data_source.dart';
 
 class UserViewModel extends ChangeNotifier {
-  final UserApi _userApi;
+  final UserDataSource _userApi;
   final List<User> _userList = [];
 
   List<User> get userList => _userList;
@@ -14,7 +14,7 @@ class UserViewModel extends ChangeNotifier {
     return _userApi.get().then((value) {
       _userList.clear();
       _userList.addAll(value);
-      notifyListeners();
+      // notifyListeners();
       return _userList;
     });
   }
